@@ -1,0 +1,10 @@
+version: v1
+name: github.com/marcelluseasley/crime-stats-analysis
+lint:
+  use:
+    - DEFAULT
+  except:
+    - PACKAGE_DIRECTORY_MATCH
+breaking:
+  use:
+    - FILE

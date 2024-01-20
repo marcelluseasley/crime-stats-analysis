@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package crimestats.v1;
+option go_package = "github.com/marcelluseasley/crime-stats-analysis/crimestats";
+
+service CrimeStatsService {
+    rpc CrimeStats(CrimeStatsRequest) returns (CrimeStatsResponse);
+}
+
+message CrimeStatsRequest {
+    string street = 1;
+    string city = 2;
+    string state = 3;
+    string zipcode = 4;
+}
+
+message CrimeStatsResponse {
+
+    message Crime {
+        string description = 1;
+        string datetime = 2;
+        repeated double location = 3;
+    }
+
+    repeated Crime items = 1;
+}
