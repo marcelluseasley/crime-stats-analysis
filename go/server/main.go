@@ -15,18 +15,18 @@ import (
 	"github.com/marcelluseasley/crime-stats-analysis/crimestats"
 )
 
-type server struct{
+type server struct {
 	crimestats.UnimplementedCrimeStatsServiceServer
 }
 
-func(s *server) CrimeStats(ctx context.Context, req *crimestats.CrimeStatsRequest) (*crimestats.CrimeStatsResponse, error){
+func (s *server) CrimeStats(ctx context.Context, req *crimestats.CrimeStatsRequest) (*crimestats.CrimeStatsResponse, error) {
 	var address string
 	var latitude float64
 	var longitude float64
 
 	log.Printf("CrimeStats function was invoked with %v", req)
 
-	location, err := bing.GetLocations(req.GetStreet(),req.GetCity(), req.GetState(), req.GetZipcode())
+	location, err := bing.GetLocations(req.GetStreet(), req.GetCity(), req.GetState(), req.GetZipcode())
 	if err != nil {
 		return nil, status.Errorf(codes.NotFound, "Could not find location: %v", err)
 	}
@@ -38,10 +38,9 @@ func(s *server) CrimeStats(ctx context.Context, req *crimestats.CrimeStatsReques
 		if len(mainResource.Point.Coordinates) != 2 {
 			return nil, status.Errorf(codes.Internal, "Wrong number of coordinates: %v", err)
 		}
-			latitude = mainResource.Point.Coordinates[0]
-			longitude = mainResource.Point.Coordinates[1]
-		
-		
+		latitude = mainResource.Point.Coordinates[0]
+		longitude = mainResource.Point.Coordinates[1]
+
 	}
 
 	return &crimestats.CrimeStatsResponse{
@@ -49,7 +48,7 @@ func(s *server) CrimeStats(ctx context.Context, req *crimestats.CrimeStatsReques
 			{
 				Description: address,
 				Datetime:    "",
-				Location:    []float64{
+				Location: []float64{
 					latitude,
 					longitude,
 				},
