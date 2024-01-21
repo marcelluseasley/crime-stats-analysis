@@ -11,6 +11,7 @@ import (
 	"google.golang.org/grpc/status"
 
 	"github.com/marcelluseasley/crime-stats-analysis/server/bing"
+	"github.com/marcelluseasley/crime-stats-analysis/server/crimedata"
 
 	"github.com/marcelluseasley/crime-stats-analysis/crimestats"
 )
@@ -26,22 +27,12 @@ func (s *server) CrimeStats(ctx context.Context, req *crimestats.CrimeStatsReque
 
 	log.Printf("CrimeStats function was invoked with %v", req)
 
-	location, err := bing.GetLocations(req.GetStreet(), req.GetCity(), req.GetState(), req.GetZipcode())
+	address, latitude, longitude, err := getLocationData(req.GetStreet(), req.GetCity(), req.GetState(), req.GetZipcode())
 	if err != nil {
-		return nil, status.Errorf(codes.NotFound, "Could not find location: %v", err)
+		return nil, err
 	}
 
-	if location != nil && len(location.ResourceSets) > 0 && len(location.ResourceSets[0].Resources) > 0 {
-		mainResource := location.ResourceSets[0].Resources[0]
-		address = mainResource.Name
-
-		if len(mainResource.Point.Coordinates) != 2 {
-			return nil, status.Errorf(codes.Internal, "Wrong number of coordinates: %v", err)
-		}
-		latitude = mainResource.Point.Coordinates[0]
-		longitude = mainResource.Point.Coordinates[1]
-
-	}
+	crimes, err := crimedata.GetCrimeLocations(req.GetStartdate(), req.GetEnddate(), latitude, longitude)
 
 	return &crimestats.CrimeStatsResponse{
 		Items: []*crimestats.CrimeStatsResponse_Crime{
@@ -55,6 +46,29 @@ func (s *server) CrimeStats(ctx context.Context, req *crimestats.CrimeStatsReque
 			}, // Add a comma here
 		},
 	}, nil
+}
+
+func getLocationData(street, city, state, zipcode string) (string, float64, float64, error) {
+	location, err := bing.GetLocations(street, city, state, zipcode)
+	if err != nil {
+		return "", 0, 0, status.Errorf(codes.NotFound, "Could not find location: %v", err)
+	}
+
+	var address string
+	var latitude, longitude float64
+
+	if location != nil && len(location.ResourceSets) > 0 && len(location.ResourceSets[0].Resources) > 0 {
+		mainResource := location.ResourceSets[0].Resources[0]
+		address = mainResource.Name
+
+		if len(mainResource.Point.Coordinates) != 2 {
+			return "", 0, 0, status.Errorf(codes.Internal, "Wrong number of coordinates: %v", err)
+		}
+		latitude = mainResource.Point.Coordinates[0]
+		longitude = mainResource.Point.Coordinates[1]
+	}
+
+	return address, latitude, longitude, nil
 }
 
 func main() {
