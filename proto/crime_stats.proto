@@ -12,6 +12,8 @@ message CrimeStatsRequest {
     string city = 2;
     string state = 3;
     string zipcode = 4;
+    string startdate = 5;
+    string enddate = 6;
 }
 
 message CrimeStatsResponse {

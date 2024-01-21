@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17proto/crime_stats.proto\x12\rcrimestats.v1\"o\n\x11\x43rimeStatsRequest\x12\x16\n\x06street\x18\x01 \x01(\tR\x06street\x12\x12\n\x04\x63ity\x18\x02 \x01(\tR\x04\x63ity\x12\x14\n\x05state\x18\x03 \x01(\tR\x05state\x12\x18\n\x07zipcode\x18\x04 \x01(\tR\x07zipcode\"\xb6\x01\n\x12\x43rimeStatsResponse\x12=\n\x05items\x18\x01 \x03(\x0b\x32\'.crimestats.v1.CrimeStatsResponse.CrimeR\x05items\x1a\x61\n\x05\x43rime\x12 \n\x0b\x64\x65scription\x18\x01 \x01(\tR\x0b\x64\x65scription\x12\x1a\n\x08\x64\x61tetime\x18\x02 \x01(\tR\x08\x64\x61tetime\x12\x1a\n\x08location\x18\x03 \x03(\x01R\x08location2f\n\x11\x43rimeStatsService\x12Q\n\nCrimeStats\x12 .crimestats.v1.CrimeStatsRequest\x1a!.crimestats.v1.CrimeStatsResponseB<Z:github.com/marcelluseasley/crime-stats-analysis/crimestatsb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17proto/crime_stats.proto\x12\rcrimestats.v1\"\xa7\x01\n\x11\x43rimeStatsRequest\x12\x16\n\x06street\x18\x01 \x01(\tR\x06street\x12\x12\n\x04\x63ity\x18\x02 \x01(\tR\x04\x63ity\x12\x14\n\x05state\x18\x03 \x01(\tR\x05state\x12\x18\n\x07zipcode\x18\x04 \x01(\tR\x07zipcode\x12\x1c\n\tstartdate\x18\x05 \x01(\tR\tstartdate\x12\x18\n\x07\x65nddate\x18\x06 \x01(\tR\x07\x65nddate\"\xb6\x01\n\x12\x43rimeStatsResponse\x12=\n\x05items\x18\x01 \x03(\x0b\x32\'.crimestats.v1.CrimeStatsResponse.CrimeR\x05items\x1a\x61\n\x05\x43rime\x12 \n\x0b\x64\x65scription\x18\x01 \x01(\tR\x0b\x64\x65scription\x12\x1a\n\x08\x64\x61tetime\x18\x02 \x01(\tR\x08\x64\x61tetime\x12\x1a\n\x08location\x18\x03 \x03(\x01R\x08location2f\n\x11\x43rimeStatsService\x12Q\n\nCrimeStats\x12 .crimestats.v1.CrimeStatsRequest\x1a!.crimestats.v1.CrimeStatsResponseB<Z:github.com/marcelluseasley/crime-stats-analysis/crimestatsb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,12 +22,12 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto.crime_stats_pb2', _gl
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z:github.com/marcelluseasley/crime-stats-analysis/crimestats'
-  _globals['_CRIMESTATSREQUEST']._serialized_start=42
-  _globals['_CRIMESTATSREQUEST']._serialized_end=153
-  _globals['_CRIMESTATSRESPONSE']._serialized_start=156
-  _globals['_CRIMESTATSRESPONSE']._serialized_end=338
-  _globals['_CRIMESTATSRESPONSE_CRIME']._serialized_start=241
-  _globals['_CRIMESTATSRESPONSE_CRIME']._serialized_end=338
-  _globals['_CRIMESTATSSERVICE']._serialized_start=340
-  _globals['_CRIMESTATSSERVICE']._serialized_end=442
+  _globals['_CRIMESTATSREQUEST']._serialized_start=43
+  _globals['_CRIMESTATSREQUEST']._serialized_end=210
+  _globals['_CRIMESTATSRESPONSE']._serialized_start=213
+  _globals['_CRIMESTATSRESPONSE']._serialized_end=395
+  _globals['_CRIMESTATSRESPONSE_CRIME']._serialized_start=298
+  _globals['_CRIMESTATSRESPONSE_CRIME']._serialized_end=395
+  _globals['_CRIMESTATSSERVICE']._serialized_start=397
+  _globals['_CRIMESTATSSERVICE']._serialized_end=499
 # @@protoc_insertion_point(module_scope)
