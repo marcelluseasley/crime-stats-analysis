@@ -18,7 +18,7 @@ func GetCrimeLocations(startdate, enddate string, lat, long float64) (*Crimes, e
 		return nil, err
 	}
 
-	req.Header.Add("X-RapidAPI-Key", "d3bf40cb61msh822f908de5fb96ap1ad337jsn41a69d29e0d9")
+	req.Header.Add("X-RapidAPI-Key", "xxx")
 	req.Header.Add("X-RapidAPI-Host", "jgentes-Crime-Data-v1.p.rapidapi.com")
 
     res, err := http.DefaultClient.Do(req)
